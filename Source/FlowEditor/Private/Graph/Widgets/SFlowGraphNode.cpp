@@ -208,6 +208,12 @@ void SFlowGraphNode::UpdateGraphNode()
 
 	const TSharedRef<SOverlay> DefaultTitleAreaWidget = SNew(SOverlay)
 		+ SOverlay::Slot()
+		[
+			SNew(SImage)
+			.Image( FAppStyle::GetBrush("Graph.Node.TitleGloss") )
+			.ColorAndOpacity( this, &SGraphNode::GetNodeTitleIconColor )
+		]
+		+ SOverlay::Slot()
 		.HAlign(HAlign_Fill)
 		.VAlign(VAlign_Center)
 		[
@@ -216,7 +222,7 @@ void SFlowGraphNode::UpdateGraphNode()
 			.HAlign(HAlign_Fill)
 			[
 				SNew(SBorder)
-				.BorderImage(FFlowEditorStyle::GetBrush("Flow.Node.Title"))
+				.BorderImage(FAppStyle::GetBrush("Graph.Node.ColorSpill"))
 				// The extra margin on the right is for making the color spill stretch well past the node title
 				.Padding(FMargin(10, 5, 30, 3))
 				.BorderBackgroundColor(this, &SFlowGraphNode::GetBorderBackgroundColor)
@@ -246,6 +252,26 @@ void SFlowGraphNode::UpdateGraphNode()
 								]
 						]
 				]
+			]
+			+ SHorizontalBox::Slot()
+			.HAlign(HAlign_Right)
+			.VAlign(VAlign_Center)
+			.Padding(0, 0, 5, 0)
+			.AutoWidth()
+			[
+				CreateTitleRightWidget()
+			]
+		]
+		+SOverlay::Slot()
+		.VAlign(VAlign_Top)
+		[
+			SNew(SBorder)
+			.Visibility(EVisibility::HitTestInvisible)			
+			.BorderImage( FAppStyle::GetBrush( "Graph.Node.TitleHighlight" ) )
+			.BorderBackgroundColor( this, &SGraphNode::GetNodeTitleIconColor )
+			[
+				SNew(SSpacer)
+				.Size(FVector2D(20,20))
 			]
 		];
 
@@ -629,7 +655,7 @@ TSharedRef<SWidget> SFlowGraphNode::CreateNodeContentArea()
 
 const FSlateBrush* SFlowGraphNode::GetNodeBodyBrush() const
 {
-	return FFlowEditorStyle::GetBrush("Flow.Node.Body");
+	return FAppStyle::GetBrush("Graph.Node.Body");
 }
 
 FSlateColor SFlowGraphNode::GetNodeTitleColor() const
