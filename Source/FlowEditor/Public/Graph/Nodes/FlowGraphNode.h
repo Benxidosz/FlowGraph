@@ -192,6 +192,8 @@ public:
 	void AddUserInput();
 	void AddUserOutput();
 
+	FLinearColor GetPinModifierColor(const UEdGraphPin* Pin) const;
+
 	// Add pin only on this instance of node, under default pins
 	void AddInstancePin(const EEdGraphPinDirection Direction, const uint8 NumberedPinsAmount);
 
@@ -343,6 +345,10 @@ public:
 	/** error message for node */
 	UPROPERTY()
 	FString ErrorMessage;
+
+protected:
+	UPROPERTY()
+	TMap<FName, FLinearColor> PinColorModifierMap;
 
 private:
 	/** parent UFlowGraphNode for this node, 

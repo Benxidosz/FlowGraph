@@ -339,11 +339,13 @@ void UFlowGraphNode::AllocateDefaultPins()
 		for (const FFlowPin& InputPin : FlowNode->InputPins)
 		{
 			CreateInputPin(InputPin);
+			PinColorModifierMap.Add(InputPin.PinName, InputPin.PinColorModifier);
 		}
 
 		for (const FFlowPin& OutputPin : FlowNode->OutputPins)
 		{
 			CreateOutputPin(OutputPin);
+			PinColorModifierMap.Add(OutputPin.PinName, OutputPin.PinColorModifier);
 		}
 	}
 }
@@ -943,6 +945,11 @@ void UFlowGraphNode::AddUserOutput()
 {
 	UFlowNode* FlowNode = Cast<UFlowNode>(NodeInstance);
 	AddInstancePin(EGPD_Output, FlowNode->CountNumberedOutputs());
+}
+
+FLinearColor UFlowGraphNode::GetPinModifierColor(const UEdGraphPin* Pin) const
+{
+	return PinColorModifierMap.FindRef(Pin->PinName, FColor::White);
 }
 
 void UFlowGraphNode::AddInstancePin(const EEdGraphPinDirection Direction, const uint8 NumberedPinsAmount)

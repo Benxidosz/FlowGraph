@@ -45,6 +45,7 @@ void SFlowGraphPinExec::Construct(const FArguments& InArgs, UEdGraphPin* InPin)
 {
 	SGraphPinExec::Construct(SGraphPinExec::FArguments(), InPin);
 	bUsePinColorForText = true;
+	PinColorModifier = InArgs._PinModifierColor;
 }
 
 const FLinearColor SFlowGraphNode::UnselectedNodeTint = FLinearColor(1.0f, 1.0f, 1.0f, 0.5f);

@@ -29,7 +29,8 @@ TSharedPtr<SGraphPin> FFlowGraphPinFactory::CreatePin(UEdGraphPin* InPin) const
 	// Create the widget for a Flow 'Exec'-style pin
 	if (FlowGraphNode && FFlowPin::IsExecPinCategory(InPin->PinType.PinCategory))
 	{
-		const TSharedPtr<SGraphPin> NewPinWidget = SNew(SFlowGraphPinExec, InPin);
+		const TSharedPtr<SGraphPin> NewPinWidget = SNew(SFlowGraphPinExec, InPin)
+														.PinModifierColor(FlowGraphNode->GetPinModifierColor(InPin));
 
 		const UFlowNode* FlowNode = Cast<UFlowNode>(FlowGraphNode->GetFlowNodeBase());
 

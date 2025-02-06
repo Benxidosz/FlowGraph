@@ -12,7 +12,10 @@ class FLOWEDITOR_API SFlowGraphPinExec : public SGraphPinExec
 public:
 	SFlowGraphPinExec();
 
-	SLATE_BEGIN_ARGS(SFlowGraphPinExec) {}
+	SLATE_BEGIN_ARGS(SFlowGraphPinExec) :
+		_PinModifierColor(FLinearColor::White)
+		{} 
+		SLATE_ARGUMENT(FLinearColor, PinModifierColor)
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments& InArgs, UEdGraphPin* InPin);

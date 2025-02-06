@@ -30,6 +30,9 @@ struct FLOW_API FFlowPin
 	UPROPERTY(EditDefaultsOnly, Category = FlowPin)
 	FString PinToolTip;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "FlowPin")
+	FLinearColor PinColorModifier = FLinearColor::White;
+
 protected:
 	// PinType (implies PinCategory)
 	UPROPERTY(EditAnywhere, Category = FlowPin)
